@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <button class="action-button edit-button" onclick="history.back()"><span><i class="fa-solid fa-arrow-left"></i> Volver</span></button>
+        <div class="editar">
+            <div class="modal-content">
+
+                <h2>Editar Cargo</h2>
+                <p>Ingrese los datos actualizados del cargo:</p>
+                <form action="/pcargo/actualizar" method="POST">
+                    <input type="hidden" name="id_cargo" value="<?php echo htmlspecialchars($cargo['id']); ?>">
+
+                    <div class="modal-form-group">
+                        <label for="nombre_cargo">Nombre:</label>
+                        <input type="text" id="nombre_cargo" name="nombre_cargo" value="<?php echo htmlspecialchars($cargo['nombre']); ?>" required>
+                    </div>
+                    
+                    <div class="modal-form-group">
+                        <label for="descripcion_cargo">Descripcion:</label>
+                        <input type="text" id="descripcion_cargo" name="descripcion_cargo" value="<?php echo htmlspecialchars($cargo['descripcion']); ?>" required>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="submit" class="action-button">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

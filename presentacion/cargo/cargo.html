@@ -1,14 +1,160 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gestionar Cargo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
-    <h1>Gestionar cargo</h1>
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="navbar-brand">Iglesia 3 capas</a>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="#" class="active">Inicio</a></li>
+                 <li class="nav-item"><a href="/pcargo">Cargos</a></li>
+                <li class="nav-item"><a href="/ptipoEvento">Tipos de Evento</a></li>
+                <li class="nav-item"><a href="#">Reportes</a></li>
+                <li class="nav-item"><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        <div>
+            <h1>Listado de Cargos</h1>
+        </div>
+        <div>
+            <button id="btn_nuevo_cargo" class="action-button delete-button" title="Nuevo"> <span> <i class="fa-solid fa-circle-plus"></i> </span></button>
+        </div>
+        <table class="cargos-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre del Cargo</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (!empty($cargos)) {
+                    foreach ($cargos as $cargo) {
+                        echo '<tr>';
+                        echo '<td data-label="ID">' . htmlspecialchars($cargo['id']) . '</td>';
+                        echo '<td data-label="Nombre del Cargo">' . htmlspecialchars($cargo['nombre']) . '</td>';
+                        echo '<td data-label="Descripción">' . htmlspecialchars($cargo['descripcion']) . '</td>';
+                        echo '<td data-label="Acciones">';
 
+                        echo '<form action="/pcargo/editar/' . htmlspecialchars($cargo['id']) . '" method="POST" style="display:inline-block;">';
+                        echo '<button class="action-button edit-button" title="Editar"><i class="fas fa-edit"></i></button>';
+                        echo '</form>';
+                        echo '<form action="/pcargo/eliminar/' . htmlspecialchars($cargo['id']) . '" method="POST" style="display:inline-block;">';
+                        echo '<button type="submit" class="action-button delete-button" title="Eliminar"><i class="fas fa-trash-alt"></i></button>';
+                        echo '</form>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="4">No hay cargos disponibles.</td></tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <div id="modal_nuevo_cargo" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nuevo Cargo</h2>
+            <p>Ingrese los datos del nuevo cargo:</p>
+            <form action="/pcargo/guardar" method="POST">
+                <div class="modal-form-group">
+                    <label for="nombre_cargo">Nombre:</label>
+                    <input type="text" id="nombre_cargo" name="nombre_cargo" placeholder="Ingrese el nombre del cargo" required>
+                </div>
+                
+                <div class="modal-form-group">
+                    <label for="descripcion_cargo">Descripcion:</label>
+                    <input type="text" id="descripcion_cargo" name="descripcion_cargo" placeholder="Ingrese la descripcion del cargo" required>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="action-button">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id="modal_editar_cargo" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Cargo</h2>
+            <p>Ingrese los nuevos datos del cargo:</p>
+            <form action="" method="POST">
+                <div class="modal-form-group">
+                    <label for="nombre_cargo">Nombre:</label>
+                    <input type="text" id="nombre_cargo" name="nombre_cargo" value="prueba nombre" required>
+                </div>
+                
+                <div class="modal-form-group">
+                    <label for="descripcion_cargo">Descripcion:</label>
+                    <input type="text" id="descripcion_cargo" name="descripcion_cargo" value="prueba descripcion" required>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="action-button">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        var nuevo_cargo_button = document.getElementById("btn_nuevo_cargo");
+        var modal = document.getElementById("modal_nuevo_cargo");
+        var closeModal = document.getElementsByClassName("close")[0];
+        var nombre_cargo = document.getElementById("nombre_cargo");
+        var descripcion_cargo = document.getElementById("descripcion_cargo");
+                                                                                                                            
+        nuevo_cargo_button.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        closeModal.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                nombre_cargo.value = '';
+                descripcion_cargo.value = '';
+            }
+        }
+    </script>
+    <script>
+        var editar_cargo = document.getElementById("btn_editar_cargo");
+        var modalEditar = document.getElementById("modal_editar_cargo");
+        var closeModalEditar = modalEditar.getElementsByClassName("close")[0];
+        var nombre_cargo_editar = modalEditar.querySelector("#nombre_cargo");
+        var descripcion_cargo_editar = modalEditar.querySelector("#descripcion_cargo");
+
+        editar_cargo.onclick = function() {
+            modalEditar.style.display = "block";
+        }
+
+        closeModalEditar.onclick = function() {
+            modalEditar.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modalEditar) {
+                modalEditar.style.display = "none";
+                nombre_cargo_editar.value = '';
+                descripcion_cargo_editar.value = '';
+            }
+        }
+    </script>
 </body>
 </html>

@@ -1,11 +1,6 @@
 <?php
 
-namespace config;
-
-use PDO;
-use PDOException;
-
-Class Connection{
+Class Conexion{
     private $host = "localhost";
     private $user   = "root";
     private $pass   = '';

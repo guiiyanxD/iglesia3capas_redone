@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <button class="action-button edit-button" onclick="history.back()"><span><i class="fa-solid fa-arrow-left"></i> Volver</span></button>
+        <div class="editar">
+            <div class="modal-content">
+
+                <h2>Editar Tipo de Evento</h2>
+                <p>Ingrese los datos actualizados del tipo de evento:</p>
+                <form action="/ptipoEvento/actualizar" method="POST">
+                    <input type="hidden" name="id_tipo_evento" value="<?php echo htmlspecialchars($tipoEvento['id']); ?>">
+
+                    <div class="modal-form-group">
+                        <label for="nombre_tipo_evento">Nombre:</label>
+                        <input type="text" id="nombre_tipo_evento" name="nombre_tipo_evento" value="<?php echo htmlspecialchars($tipoEvento['nombre']); ?>" required>
+                    </div>
+
+                    <div class="modal-form-group">
+                        <label for="frecuencia_tipo_evento">Frecuencia:</label>
+                        <input type="text" id="frecuencia_tipo_evento" name="frecuencia_tipo_evento" value="<?php echo htmlspecialchars($tipoEvento['frecuencia']); ?>" required>
+                    </div>
+
+                    <div class="modal-form-group">
+                        <label for="descripcion_tipo_evento">Descripcion:</label>
+                        <input type="text" id="descripcion_tipo_evento" name="descripcion_tipo_evento" value="<?php echo htmlspecialchars($tipoEvento['descripcion']); ?>" required>
+                    </div>
+
+                    <div class="modal-actions">
+                        <button type="submit" class="action-button">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
