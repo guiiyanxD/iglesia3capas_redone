@@ -1,5 +1,5 @@
 <?php 
-require_once('./dato/tipoEvento/dtipoEvento.php');
+require_once('../dato/tipoEvento/dtipoEvento.php');
 
 class NTipoEvento{
     private $dtipoevento;
@@ -21,11 +21,8 @@ class NTipoEvento{
     }
 
     public function eliminar($id){
-        if(is_numeric($id)){
-            return $this->dtipoEvento->eliminar($id);
-        }else{
-            throw new Exception("Error al eliminar Negocio");
-        }
+        return $this->dtipoEvento->eliminar($id);
+
     }
 
     public function editar($id){

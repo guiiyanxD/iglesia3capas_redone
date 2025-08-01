@@ -1,5 +1,5 @@
 <?php
-require_once("./negocio/cargo/ncargo.php");
+require_once("../negocio/cargo/ncargo.php");
 
 class PCargo {
 

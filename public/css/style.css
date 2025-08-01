@@ -184,7 +184,7 @@ body {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     padding: 30px;
     width: 90%;
-    max-width: 1000px;
+    max-width: 1500px;
     box-sizing: border-box;
 }
 
@@ -377,7 +377,6 @@ h1 {
 .editar {
     display: flex; /* Oculto por defecto */
     position: fixed; /* Posición fija en la pantalla */
-    z-index: 1001; /* Asegura que esté encima de todo, incluyendo el navbar */
     left: 0;
     top: 0;
     width: 100%; /* Cubre todo el ancho */
@@ -386,7 +385,7 @@ h1 {
     background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente oscuro */
     align-items: center; /* Centrado vertical */
     justify-content: center; /* Centrado horizontal */
-    padding: 20px; /* Padding para evitar que el modal toque los bordes */
+    padding: 10px; /* Padding para evitar que el modal toque los bordes */
     box-sizing: border-box; /* Incluye padding en el ancho/alto total */
 }
 

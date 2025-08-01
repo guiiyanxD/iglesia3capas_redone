@@ -1,6 +1,6 @@
 <?php
 
-require_once('./negocio/tipoEvento/ntipoEvento.php');
+require_once('../negocio/tipoEvento/ntipoEvento.php');
 
 class PTipoEvento{
     private $ntipoEvento;

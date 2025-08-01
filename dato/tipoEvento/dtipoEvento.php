@@ -1,5 +1,5 @@
 <?php
-require_once("./config/connection.php");
+require_once("../config/connection.php");
 class DTipoEvento{
     private $conn;
     private $pdo;

@@ -1,5 +1,5 @@
 <?php
-    require './dato/cargo/dcargo.php';
+    require '../dato/cargo/dcargo.php';
 class NCargo{
     private $dcargo;
     public function __construct(){
