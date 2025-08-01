@@ -575,3 +575,93 @@ h1 {
 .main-menu-button:hover i {
     color: var(--light-yellow); /* Color del icono más claro al pasar el mouse */
 }
+
+/* --- Estilos para inputs de tipo Date y Select --- */
+
+/* Estilo base para todos los inputs y selects */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"], /* Agregado */
+textarea,
+select { /* Agregado */
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-soft); /* Borde suave y coherente */
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1em;
+    font-family: inherit; /* Hereda la fuente del cuerpo */
+    color: var(--black-olive); /* Color de texto principal */
+    background-color: var(--light-yellow); /* Fondo ligeramente amarillo */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    appearance: none; /* Elimina la apariencia por defecto del navegador en select */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Efecto al enfocar (focus) en todos los campos */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus, /* Agregado */
+textarea:focus,
+select:focus { /* Agregado */
+    border-color: var(--cocoa-brown); /* Borde vibrante al enfocar */
+    outline: none;
+    box-shadow: 0 0 8px rgba(218, 116, 34, 0.2); /* Sombra suave */
+    background-color: #ffffff; /* Fondo blanco al enfocar */
+}
+
+/* Estilos específicos para el Select */
+select {
+    cursor: pointer;
+    /* Añade un icono de flecha personalizado para reemplazar el de por defecto */
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%2330362f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+    padding-right: 30px; /* Asegura que el texto no se superponga con la flecha */
+}
+
+select::-ms-expand {
+    display: none; /* Oculta la flecha por defecto en IE/Edge */
+}
+
+/* Estilos para las opciones dentro del Select */
+select option {
+    color: var(--black-olive);
+    background-color: #ffffff;
+}
+
+/* Estilos específicos para el Input Date */
+input[type="date"] {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Opcional: Estilo para ocultar el icono de calendario por defecto en algunos navegadores */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: transparent;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Opcional: Un icono de calendario personalizado (usando Font Awesome) */
+
+input[type="date"]::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f073"; 
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--black-olive);
+    pointer-events: none;
+}

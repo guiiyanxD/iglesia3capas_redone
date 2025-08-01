@@ -1,6 +1,7 @@
 <?php
 require_once("../presentacion/cargo/pcargo.php");
 require_once("../presentacion/tipoEvento/ptipoEvento.php");
+require_once("../presentacion/ministerio/pministerio.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SERVER['REQUEST_URI'] === '/') {
     require_once("../home.html");
@@ -72,5 +73,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['REQUEST_URI'] === '/ptipoE
     return;
 }
 
+/**
+ * AQUI COMIENZAN LAS RUTAS DE MINISTERIO
+ */
 
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SERVER['REQUEST_URI'] === '/pministerio') {
+    $pministerio = new PMinisterio();
+    $pministerio->listar();
+    return;
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['REQUEST_URI'] === '/pministerio/guardar') {
+    $ptipoEvento = new PMinisterio();
+    $ptipoEvento->guardar(
+        $_REQUEST['nombre'], 
+        $_REQUEST['mision'], 
+        $_REQUEST['vision'],
+        $_REQUEST['fechaCreacion'], 
+        $_REQUEST['activo'], 
+    );
+    return;
+}
 

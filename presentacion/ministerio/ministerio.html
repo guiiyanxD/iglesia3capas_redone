@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Ministerios</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar">
+            <a href="/" class="navbar-brand">Iglesia 3 capas</a>
+            <div class="menu-toggle">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul class="nav-links">
+                <li class="nav-item"><a href="#" class="active">Inicio</a></li>
+                 <li class="nav-item"><a href="/pcargo">Cargos</a></li>
+                <li class="nav-item"><a href="/ptipoEvento">Tipos de Evento</a></li>
+                <li class="nav-item"><a href="/pministerio">Ministerios</a></li>
+                <li class="nav-item"><a href="#">Contacto</a></li>
+            </ul>
+        </nav>
+        <div>
+            <h1>Listado de Ministerios</h1>
+        </div>
+        <div>
+            <button id="btn_nuevo_ministerio" class="action-button delete-button" title="Nuevo"> <span> <i class="fa-solid fa-circle-plus"></i> </span></button>
+        </div>
+        <table class="cargos-table">
+            <thead>
+                <tr>
+                    <th>Nombre del Ministerio</th>
+                    <th>Mision</th>
+                    <th>Vision</th>
+                    <th>Fecha de Creacion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (!empty($ministerios)) {
+                    foreach ($ministerios as $ministerio) {
+                        echo '<tr>';
+                        echo '<td data-label="Nombre del Ministerio">' . htmlspecialchars($ministerio['nombre']) . '</td>';
+                        echo '<td data-label="Mision">' . htmlspecialchars($ministerio['mision']) . '</td>';
+                        echo '<td data-label="Vision">' . htmlspecialchars($ministerio['vision']) . '</td>';
+                        echo '<td data-label="Fecha de Creacion">' . htmlspecialchars($ministerio['fechaCreacion']) . '</td>';
+                        echo '<td data-label="Acciones">';
+
+                        echo '<form action="/pministerio/editar/' . htmlspecialchars($ministerio['id']) . '" method="POST" style="display:inline-block;">';
+                        echo '<button class="action-button edit-button" title="Editar"><i class="fas fa-edit"></i></button>';
+                        echo '</form>';
+                        echo '<form action="/pministerio/eliminar/' . htmlspecialchars($ministerio['id']) . '" method="POST" style="display:inline-block;">';
+                        echo '<button type="submit" class="action-button delete-button" title="Eliminar"><i class="fas fa-trash-alt"></i></button>';
+                        echo '</form>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                } else {
+                    echo '<tr><td colspan="4">No hay ministerios disponibles.</td></tr>';
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+    <div id="modal_nuevo_ministerio" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Nuevo Ministerio</h2>
+            <p>Ingrese los datos del nuevo ministerio.</p>
+
+            <form action="/pministerio/guardar" method="POST"> 
+                <div class="modal-form-group">
+                    <label for="nombre">Nombre del Ministerio:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="nombre">Mision del Ministerio:</label>
+                    <input type="text" id="mision" name="mision" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="nombre">Vision del Ministerio:</label>
+                    <input type="text" id="vision" name="vision" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="nombre">Fecha de creacion del Ministerio:</label>
+                    <input type="date" id="fechaCreacion" name="fechaCreacion" required>
+                </div>
+                <div class="modal-form-group">
+                    <label for="estado">Estado del Ministerio:</label>
+                    <select name="activo" id="activo" required>
+                        <option value="-1" selected>Selecciona el estado</option>
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="action-button edit-button">Guardar</button>
+                    <button type="button" class="action-button delete-button">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        btn_abrir_modal = document.getElementById('btn_nuevo_ministerio');
+        btn_crerrar_modal = document.getElementsByClassName('close')[0];
+        modal = document.getElementById("modal_nuevo_ministerio");
+        
+        btn_crerrar_modal.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        btn_abrir_modal.onclick = function() {
+            modal.style.display = "block";
+        }
+    </script>
+</body>
+</html>
