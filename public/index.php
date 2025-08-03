@@ -83,8 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SERVER['REQUEST_URI'] === '/pminist
     return;
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['REQUEST_URI'] === '/pministerio/guardar') {
-    $ptipoEvento = new PMinisterio();
-    $ptipoEvento->guardar(
+    var_dump($_REQUEST);
+    $pministerio = new PMinisterio();
+    $pministerio->guardar(
         $_REQUEST['nombre'], 
         $_REQUEST['mision'], 
         $_REQUEST['vision'],

@@ -14,6 +14,7 @@ class PMinisterio {
     }
 
     public function guardar($nombre, $mision, $vision, $fechaCreacion, $activo){
+        var_dump($nombre, $mision, $vision, $fechaCreacion, $activo);
         try{
             $this->nministerio->guardar($nombre, $mision, $vision, $fechaCreacion, $activo);
             header("Location: /pministerio");

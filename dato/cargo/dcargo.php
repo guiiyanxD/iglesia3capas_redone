@@ -30,9 +30,9 @@ require_once ('../config/connection.php');
             }else{
                 throw new Exception("La lista esta vacia");
             }
-         }catch (\Exception $e){
+        }catch (\Exception $e){
             return $e->getMessage();
-         }
+        }
     }
     public function guardar($nombre, $descripcion){
         $sql = 'INSERT INTO cargo (nombre, descripcion) VALUES (:nombre, :descripcion)';
