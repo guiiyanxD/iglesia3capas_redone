@@ -33,17 +33,18 @@ class DMinisterio {
     }
 
     public function guardar($nombre, $mision, $vision, $fechaCreacion, $activo){
-        $sql = "INSERT INTO ministerio (nombre, mision, vision, fechaCreacion, activo) 
-            VALUES (:nombre, :mision, :vision, :fechaCreacion, :activo)";
+        $sql = "INSERT INTO ministerio (nombre, mision, vision, fechaCreacion, activo, idLider) 
+            VALUES (:nombre, :mision, :vision, :fechaCreacion, :activo, :idLider)";
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->bindParam(':nombre', $nombre);
             $stm->bindParam(':mision', $mision);
             $stm->bindParam(':vision', $vision);
             $stm->bindParam(':fechaCreacion', $fechaCreacion);
-            $stm->bindParam(':activo', $activo);
+            $stm->bindParam(':activo', $activo, \PDO::PARAM_BOOL);
+            $stm->bindValue(':idLider', null, \PDO::PARAM_NULL); // Assuming idLider is optional
             $stm->execute();
-            if ($stm->rowCount() === 0) {
+            if ($stm->rowCount() > 0) {
                 throw new Exception("No se pudo guardar el ministerio.");
             }
         } catch (\PDOException $th) {
@@ -51,5 +52,17 @@ class DMinisterio {
         }
     }
 
-
+    public function eliminar($id) {
+        $sql = "DELETE FROM ministerio WHERE idMinisterio   = :id";
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam(':id', $id, \PDO::PARAM_INT);
+            $stm->execute();
+            if ($stm->rowCount() === 0) {
+                throw new Exception("No se pudo eliminar el ministerio con ID: $id");
+            }
+        } catch (\PDOException $th) {
+            throw new \Exception("Error de base de datos al eliminar el ministerio: " . $th->getMessage());
+        }
+    }
 }

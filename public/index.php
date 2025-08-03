@@ -83,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SERVER['REQUEST_URI'] === '/pminist
     return;
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['REQUEST_URI'] === '/pministerio/guardar') {
-    var_dump($_REQUEST);
     $pministerio = new PMinisterio();
     $pministerio->guardar(
         $_REQUEST['nombre'], 
@@ -92,6 +91,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['REQUEST_URI'] === '/pminis
         $_REQUEST['fechaCreacion'], 
         $_REQUEST['activo'], 
     );
+    return;
+}
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && preg_match('/^\/pministerio\/eliminar\/(\d+)$/', $_SERVER['REQUEST_URI'], $matches)) {
+    $pministerio = new PMinisterio();
+    $pministerio->eliminar($matches[1]);
     return;
 }
 

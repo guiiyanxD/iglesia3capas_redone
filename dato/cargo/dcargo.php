@@ -21,9 +21,11 @@ require_once ('../config/connection.php');
     public function listar(){
          $result = [];
          $sql = 'select * from cargo';
+
          try {
             $st = $this->pdo->prepare($sql);
             $st->execute();
+            
             $result = $st->fetchAll(\PDO::FETCH_ASSOC);
             if($st->rowCount() > 0 ){
                 return $result;

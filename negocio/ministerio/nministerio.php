@@ -14,14 +14,28 @@ class NMinisterio{
     }
 
     public function guardar($nombre, $mision, $vision, $fechaCreacion, $activo){
+        //var_dump($nombre, $mision, $vision, $fechaCreacion, $activo);
+        // 0 = false
+        // 1 = true 
+        $activoo = $activo == 1 ? true : false; 
         try{
-            if( $activo !== -1 ){
-                return $this->dministerio->guardar($nombre, $mision, $vision, $fechaCreacion, $activo);
+            if( $activo != -1 ){
+                return $this->dministerio->guardar($nombre, $mision, $vision, $fechaCreacion, $activoo);
             }else{
                 throw new Exception("El campo 'Activo' debe ser seleccionado.");
             }
         }catch(Exception $e){
             echo "Error al guardar el ministerio: " . $e->getMessage();
+        }
+    }
+
+    public function eliminar($id){
+        try{
+            var_dump($this->dministerio->eliminar($id));
+            exit("nministterio");
+            return $this->dministerio->eliminar($id); 
+        }catch(Exception $e){
+            echo "Error al eliminar el ministerio: " . $e->getMessage();
         }
     }
 }
