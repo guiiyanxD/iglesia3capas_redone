@@ -34,8 +34,7 @@ create table ministerio(
     fechaCreacion date not null,
     activo boolean DEFAULT 1,
     idLider int null,
-    PRIMARY KEY(id),
-    foreign key (idLider) references usuario(id) ON DELETE SET NULL
+    PRIMARY KEY(id)
 );
 
 create table miembro(

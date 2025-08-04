@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SERVER['REQUEST_URI'] === '/pminis
     return;
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && preg_match('/^\/pministerio\/eliminar\/(\d+)$/', $_SERVER['REQUEST_URI'], $matches)) {
+    
     $pministerio = new PMinisterio();
     $pministerio->eliminar($matches[1]);
     return;

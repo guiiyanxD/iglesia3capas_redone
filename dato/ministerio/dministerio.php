@@ -53,7 +53,7 @@ class DMinisterio {
     }
 
     public function eliminar($id) {
-        $sql = "DELETE FROM ministerio WHERE idMinisterio   = :id";
+        $sql = "DELETE FROM ministerio WHERE id = :id";
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->bindParam(':id', $id, \PDO::PARAM_INT);

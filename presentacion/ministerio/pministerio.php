@@ -24,6 +24,7 @@ class PMinisterio {
     }
 
     public function eliminar($id){
+        
         $this->nministerio->eliminar($id);
         header("Location: /pministerio");   
     }
