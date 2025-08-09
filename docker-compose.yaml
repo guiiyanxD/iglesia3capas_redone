@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  apache:
+    build:
+      context: .
+    container_name: apache-server
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - /home/willdev/Documentos/proyectos/iglesia3capas_redone/public:/var/www/html
+    networks:
+      - general-net
+
+  db:
+    image: mariadb:10.11
+    container_name: db-server
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: will
+      MYSQL_DATABASE: iglesia_db  # Recomendado: crear una DB al iniciar
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_HOST: "%"
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - general-net
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin-server
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: user
+      PMA_PASSWORD: password  # Debe coincidir con MYSQL_PASSWORD del servicio db
+    depends_on:
+      - db
+    networks:
+      - general-net
+
+volumes:
+  db-data:
+
+networks:
+  general-net:
+    driver: bridge
