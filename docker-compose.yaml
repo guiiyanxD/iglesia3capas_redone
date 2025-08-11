@@ -9,7 +9,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - /home/willdev/Documentos/proyectos/iglesia3capas_redone/public:/var/www/html
+      - /home/willdev/Documentos/proyectos/iglesia3capas_redone/:/var/www/html
     networks:
       - general-net
 
@@ -19,7 +19,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: will
-      MYSQL_DATABASE: iglesia_db  # Recomendado: crear una DB al iniciar
+      MYSQL_DATABASE: iglesia3capas_redone # Recomendado: crear una DB al iniciar
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_HOST: "%"

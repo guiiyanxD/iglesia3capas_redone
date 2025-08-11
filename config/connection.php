@@ -1,12 +1,14 @@
 <?php
 
 Class Conexion{
-    private $host = "localhost";
-    private $user   = "root";
-    private $pass   = '';
+    private $host = "db";
+    private $user   = "user";
+    private $pass   = "password";
     private $db_name= "iglesia3capas_redone";
     private $pdo;
     public $userData = [];
+    
+    
     public function __construct(){
         $this->pdo = $this->connect();
 

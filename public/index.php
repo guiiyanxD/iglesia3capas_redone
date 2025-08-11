@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SERVER['REQUEST_URI'] === '/') {
 /**
  * Aqui empiezan las rutas de Cargo
  */
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SERVER['REQUEST_URI'] === '/pcargo') {
+if ($_SERVER['REQUEST_METHOD'] == 'GET' && $_SERVER['REQUEST_URI'] === '/pcargo') {        
     $pcargo = new PCargo();
     $pcargo->listar();
     return;

@@ -10,6 +10,7 @@ class PCargo {
     }
     
     public function listar(){
+        
         $cargos = $this->ncargo->listar();
         require 'cargo.html';
     }
