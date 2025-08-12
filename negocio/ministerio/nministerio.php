@@ -19,7 +19,7 @@ class NMinisterio{
         // 1 = true 
         $activoo = $activo == 1 ? true : false; 
         try{
-            if( $activo != -1 ){
+            if( $activo !== -1 ){
                 return $this->dministerio->guardar($nombre, $mision, $vision, $fechaCreacion, $activoo);
             }else{
                 throw new Exception("El campo 'Activo' debe ser seleccionado.");
@@ -31,8 +31,6 @@ class NMinisterio{
 
     public function eliminar($id){
         try{
-            var_dump($this->dministerio->eliminar($id));
-            exit("nministterio");
             return $this->dministerio->eliminar($id); 
         }catch(Exception $e){
             echo "Error al eliminar el ministerio: " . $e->getMessage();

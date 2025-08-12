@@ -36,15 +36,18 @@ class DMinisterio {
         $sql = "INSERT INTO ministerio (nombre, mision, vision, fechaCreacion, activo, idLider) 
             VALUES (:nombre, :mision, :vision, :fechaCreacion, :activo, :idLider)";
         try {
+            
             $stm = $this->pdo->prepare($sql);
+            
+
             $stm->bindParam(':nombre', $nombre);
             $stm->bindParam(':mision', $mision);
             $stm->bindParam(':vision', $vision);
             $stm->bindParam(':fechaCreacion', $fechaCreacion);
             $stm->bindParam(':activo', $activo, \PDO::PARAM_BOOL);
-            $stm->bindValue(':idLider', null, \PDO::PARAM_NULL); // Assuming idLider is optional
+            $stm->bindValue(':idLider', 1, \PDO::PARAM_NULL); // Assuming idLider is optional
             $stm->execute();
-            if ($stm->rowCount() > 0) {
+            if ($stm->rowCount() == 0) {
                 throw new Exception("No se pudo guardar el ministerio.");
             }
         } catch (\PDOException $th) {
