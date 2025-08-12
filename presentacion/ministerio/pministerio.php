@@ -29,4 +29,13 @@ class PMinisterio {
         $this->nministerio->eliminar($id);
         header("Location: /pministerio");   
     }
+
+    public function editar($id){
+        try{
+            $ministerio = $this->nministerio->editar($id);
+            include_once('editar.html');
+        }catch(Exception $e){
+            echo $e->getMessage();
+        }
+    }
 }

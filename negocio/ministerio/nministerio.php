@@ -36,4 +36,18 @@ class NMinisterio{
             echo "Error al eliminar el ministerio: " . $e->getMessage();
         }
     }
+
+     public function editar($id){
+        return $this->obtenerPorId($id);
+       
+    }
+
+    public function obtenerPorId($id){
+        $result = $this->dministerio->obtenerPorId($id);
+        if(!empty($result)){
+            return $result;
+        }else{
+            throw new Exception("Ministerio no encontrado con ID: " . $id);
+        }
+    }
 }

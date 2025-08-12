@@ -68,4 +68,16 @@ class DMinisterio {
             throw new \Exception("Error de base de datos al eliminar el ministerio: " . $th->getMessage());
         }
     }
+
+    public function obtenerPorId($id){
+        $sql = "SELECT * FROM ministerio WHERE id = :id";
+        try{
+            $stm = $this->pdo->prepare($sql);
+            $stm->bindParam(":id", $id);
+            $stm->execute();
+            return $stm->fetch(\PDO::FETCH_ASSOC);
+        }catch(\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

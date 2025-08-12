@@ -100,3 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && preg_match('/^\/pministerio\/elimina
     return;
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && preg_match('/^\/pministerio\/editar\/(\d+)$/', $_SERVER['REQUEST_URI'], $matches)) {
+    $pministerio = new PMinisterio();
+    $pministerio->editar($matches[1]);
+    return;
+}
+
